@@ -1,0 +1,13 @@
+// Paste this into Firebase Console → Storage → Rules.
+// Same caveat as firestore.rules: no auth yet, anyone can upload/read PDFs
+// at these paths. Fine for MVP testing, tighten before handling real
+// client documents.
+
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /apostille/{allPaths=**} {
+      allow read, write: if true; // TODO: require auth once you add login
+    }
+  }
+}
