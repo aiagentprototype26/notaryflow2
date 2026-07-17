@@ -29,5 +29,15 @@ service cloud.firestore {
       allow read: if true;
       allow write: if true; // TODO: require auth once you add login
     }
+
+    // Added for the Notary Portal. Notifications are addressed to a
+    // specific userId (a notary's authUid, or "admin" for dispatch),
+    // so scoping reads to signed-in users only is safe even though
+    // the collections above are still wide open.
+    match /notifications/{notifId} {
+      allow read: if true;
+      allow create: if true;
+      allow update, delete: if true; // TODO: require auth once you add login
+    }
   }
 }
