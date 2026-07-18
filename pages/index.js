@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Lock, Loader2, Truck, Stamp, Link as LinkIcon, Copy, Check } from "lucide-react";
+import { Loader2, Truck, Stamp, Link as LinkIcon, Copy, Check } from "lucide-react";
 import DispatchBoard from "../components/DispatchBoard";
 import ApostilleTracker from "../components/ApostilleTracker";
 import { subscribeNotaryJobs, subscribeNotaries, subscribeApostilleRequests } from "../lib/db";
@@ -30,8 +30,8 @@ export default function Home() {
 
   if (!allLoaded) {
     return (
-      <div className="min-h-screen bg-[#0b1120] flex items-center justify-center">
-        <div className="flex items-center gap-3 text-slate-400">
+      <div className="min-h-screen bg-cream flex items-center justify-center">
+        <div className="flex items-center gap-3 text-charcoal/70">
           <Loader2 size={20} className="animate-spin" /><span className="text-sm">Loading NotaryFlow…</span>
         </div>
       </div>
@@ -39,24 +39,29 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0b1120]" style={{ fontFamily: "'DM Sans','Outfit',system-ui,sans-serif" }}>
-      <header className="h-16 bg-[#080e1d] border-b border-slate-800/60 flex items-center justify-between px-6 sticky top-0 z-10">
+    <div className="min-h-screen bg-cream" style={{ fontFamily: "'Work Sans', sans-serif" }}>
+      <header className="h-16 bg-ink border-b border-gold/30 flex items-center justify-between px-6 sticky top-0 z-10">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg flex items-center justify-center shrink-0"><Lock size={15} className="text-white" /></div>
-          <span className="text-slate-100 font-bold text-base tracking-tight">NotaryFlow</span>
+          <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="shrink-0">
+            <circle cx="20" cy="20" r="18" fill="#1C2541"/>
+            <circle cx="20" cy="20" r="18" stroke="#B8912F" strokeWidth="1.5"/>
+            <circle cx="20" cy="20" r="13" stroke="#B8912F" strokeWidth="1"/>
+            <text x="20" y="24" textAnchor="middle" fontFamily="Spectral, serif" fontSize="14" fill="#EFE7D3">N</text>
+          </svg>
+          <span className="text-cream font-semibold text-base tracking-tight" style={{ fontFamily: "'Spectral', serif" }}>NotaryFlow</span>
         </div>
-        <button onClick={copyLink} className="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold px-3 py-2 rounded-lg border border-slate-700/60">
-          {copied ? <Check size={13} className="text-emerald-400" /> : <LinkIcon size={13} />}
+        <button onClick={copyLink} className="flex items-center gap-2 bg-cream2 hover:bg-[#ddd0ab] text-charcoal text-xs font-semibold px-3 py-2 rounded-sm border border-black/10">
+          {copied ? <Check size={13} className="text-emerald-700" /> : <LinkIcon size={13} />}
           {copied ? "Copied" : "Copy client intake link"}
         </button>
       </header>
 
-      <div className="border-b border-slate-800/60 bg-[#0b1120] px-6">
+      <div className="border-b border-gold/30 bg-cream px-6">
         <div className="max-w-[1400px] mx-auto flex gap-1">
-          <button onClick={() => setTab("dispatch")} className={`flex items-center gap-2 px-4 py-3 text-sm font-semibold border-b-2 transition-all ${tab === "dispatch" ? "border-blue-500 text-blue-400" : "border-transparent text-slate-500 hover:text-slate-300"}`}>
+          <button onClick={() => setTab("dispatch")} className={`flex items-center gap-2 px-4 py-3 text-sm font-semibold border-b-2 transition-all ${tab === "dispatch" ? "border-ink text-ink" : "border-transparent text-charcoal/60 hover:text-charcoal"}`}>
             <Truck size={15} /> Mobile Notary Dispatch
           </button>
-          <button onClick={() => setTab("apostille")} className={`flex items-center gap-2 px-4 py-3 text-sm font-semibold border-b-2 transition-all ${tab === "apostille" ? "border-blue-500 text-blue-400" : "border-transparent text-slate-500 hover:text-slate-300"}`}>
+          <button onClick={() => setTab("apostille")} className={`flex items-center gap-2 px-4 py-3 text-sm font-semibold border-b-2 transition-all ${tab === "apostille" ? "border-ink text-ink" : "border-transparent text-charcoal/60 hover:text-charcoal"}`}>
             <Stamp size={15} /> Apostille Tracker
           </button>
         </div>
